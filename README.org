@@ -1,0 +1,8 @@
+#+TITLE: BPNN: Behler–Parrinello neural network potential for ASE
+This project is still under development. There's nothing usable yet.
+* Things to implement
+- [ ] BPNN potential
+- [ ] BPNN potential with electrostatic interactions
+- [ ] Trainable symmetry function paramters
+- [ ] Queuing support
+- [ ] Visualization of models
