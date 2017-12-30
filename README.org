@@ -1,5 +1,9 @@
-#+TITLE: BPNN: Behler–Parrinello neural network potential for ASE
-This project is still under development. There's nothing usable yet.
+#+TITLE: Behler–Parrinello potential for ASE
+*This project is still under development. There's nothing usable here yet.*
+
+This project is inspired by [[https://bitbucket.org/andrewpeterson/amp][Amp]].
+The plan is to build everything on tensorflow and ASE, so that I can worry less about lower-level optimizations.
+
 * Things to implement
 - [ ] BPNN potential
 - [ ] BPNN potential with electrostatic interactions
