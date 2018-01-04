@@ -1,8 +1,7 @@
 #+TITLE: Behler–Parrinello potential for ASE
-*This project is still under development. There's nothing usable here yet.*
+*This project is still under development. There are some [[https://mybinder.org/v2/gh/yqshao/ase-bpnn/master][notebooks]] to try, but all the functionalities are still very unstable*
 
-This project is inspired by [[https://bitbucket.org/andrewpeterson/amp][Amp]].
-The plan is to build everything on tensorflow and ASE, so that I can worry less about lower-level optimizations.
+This project is inspired by [[https://bitbucket.org/andrewpeterson/amp][Amp]], and the plan is to build everything with tensorflow and ASE.
 
 * Things to implement
 - [ ] BPNN potential
@@ -10,3 +9,6 @@ The plan is to build everything on tensorflow and ASE, so that I can worry less 
 - [ ] Trainable symmetry function paramters
 - [ ] Queuing support
 - [ ] Visualization of models
+
+* Known problem
+We use pairwise distance matrixes to calculate distances and symmetry functions. This makes the construction of tensors easier. But if the system has periodic boundary condition and one of the lattice vetors is smaller than twice the cutoff radius, the result will be incorrect. If a small cell is calculated, it should be repeated so that the symmetry functions are correctly generated.
