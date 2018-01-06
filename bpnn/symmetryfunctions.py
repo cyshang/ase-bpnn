@@ -1,13 +1,17 @@
+"""All the symmetry functions used in BPNN
+"""
 import tensorflow as tf
+
+
 class G1:
     def __init__(self):
         pass
 
     def __repr__(self):
-        return ('G1')
+        return 'G1'
 
     def __call__(self, **var):
-        return tf.reduce_sum(var['fc'],axis=-1)
+        return tf.reduce_sum(var['fc'], axis=-1)
 
 
 class G2:
@@ -16,11 +20,11 @@ class G2:
         self.Rs = Rs
 
     def __repr__(self):
-        return ('G2(%.2f, %.2f)'%(self.eta, self.Rs))
+        return 'G2(%.2f, %.2f)' % (self.eta, self.Rs)
 
     def __call__(self, **var):
-        G2 = tf.exp(-self.eta*tf.square(var['Rij']-self.Rs)) * var['fc']
-        return tf.reduce_sum(G2,axis=-1)
+        sf = tf.exp(-self.eta * tf.square(var['Rij'] - self.Rs)) * var['fc']
+        return tf.reduce_sum(sf, axis=-1)
 
 
 class G4:
@@ -30,13 +34,15 @@ class G4:
         self.lambd = lambd
 
     def __repr__(self):
-        return ('G3(%.2f, %.2f, %.2f)'%(self.eta, self.eta, self.lambd))
+        return 'G3(%.2f, %.2f, %.2f)' % (self.eta, self.eta, self.lambd)
 
     def __call__(self, **var):
-        expo = tf.exp(-self.eta*(tf.expand_dims(var['Rij'],-1)+
-                                 tf.expand_dims(var['Rij'],-2)))
-        cosin = tf.pow(var['cos'] * self.lambd + 1,self.zeta)
-        cutoff = (tf.expand_dims(var['fc'],-1) *
-                  tf.expand_dims(var['fc'],-2))
-        G4 = tf.reduce_sum(tf.reduce_sum(2.**(1-self.zeta)*expo*cutoff*cosin,axis=-1),axis=-1)
-        return G4
+        expo = tf.exp(-self.eta * (tf.expand_dims(var['Rij'], -1) +
+                                   tf.expand_dims(var['Rij'], -2)))
+        cosin = tf.pow(var['cos'] * self.lambd + 1, self.zeta)
+        cutoff = (tf.expand_dims(var['fc'], -1) *
+                  tf.expand_dims(var['fc'], -2))
+        sf = tf.reduce_sum(tf.reduce_sum(2.**(1 - self.zeta)
+                                         * expo * cutoff * cosin,
+                                         axis=-1), axis=-1)
+        return sf
